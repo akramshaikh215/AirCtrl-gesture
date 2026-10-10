@@ -1,0 +1,24 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: saassum
+      POSTGRES_PASSWORD: saassum
+      POSTGRES_DB: saassum
+    ports: ["127.0.0.1:5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U saassum"]
+      interval: 5s
+      retries: 10
+  api:
+    build: ./backend
+    env_file: ./backend/.env
+    environment:
+      DATABASE_URL: postgresql+psycopg://saassum:saassum@postgres:5432/saassum
+    ports: ["127.0.0.1:5000:5000"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+volumes:
+  pgdata:

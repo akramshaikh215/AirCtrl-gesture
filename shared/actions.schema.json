@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Airctrl desktop action envelope",
+  "type": "object",
+  "required": [
+    "type",
+    "seq",
+    "expires"
+  ],
+  "properties": {
+    "type": {
+      "enum": [
+        "MOVE_CURSOR",
+        "CLICK",
+        "DOUBLE_CLICK",
+        "MOUSE_DOWN",
+        "MOUSE_UP",
+        "SCROLL",
+        "SET_VOLUME",
+        "SET_BRIGHTNESS",
+        "VOLUME_STEP",
+        "BRIGHTNESS_STEP",
+        "HEARTBEAT",
+        "PAUSE",
+        "RESUME",
+        "RELEASE_ALL",
+        "BACK",
+        "FORWARD",
+        "REFRESH",
+        "ZOOM"
+      ]
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "expires": {
+      "type": "number"
+    },
+    "x": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "y": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "value": {
+      "type": "number",
+      "minimum": -500,
+      "maximum": 500
+    },
+    "button": {
+      "enum": [
+        "left",
+        "right"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "$comment": "protocol.py enforces action-specific fields, bounds, freshness and sequence. Pairing required. Navigation is restricted to fixed shortcuts."
+}

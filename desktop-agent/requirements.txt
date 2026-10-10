@@ -1,0 +1,6 @@
+websockets==15.0.1
+PyAutoGUI==0.9.54
+screen-brightness-control==0.24.2
+pycaw==20251023; sys_platform == 'win32'
+pynput==1.8.1
+pytest==9.0.2
